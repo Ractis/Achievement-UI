@@ -20,7 +20,18 @@ Show popup for specified player.
 | achievementID | Integer |             |
 | playerID      | Integer |             |
 
+```
+FireGameEvent( "achievement_unlocked", {
+    achievementID = RandomInt( 0, 2 ),
+    playerID = 0,
+} )
+```
+
 
 ## test_achievement_popup
 Test popup.  
 No parameters are needed.
+
+```
+FireGameEvent( "test_achievement_popup", { } )
+```
