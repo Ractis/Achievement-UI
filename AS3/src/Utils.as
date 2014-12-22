@@ -30,8 +30,8 @@ package
 				funcDefaultTextFormat( format );
 			}
 			tf.defaultTextFormat = format;
-			
 			tf.text = text;
+			tf.setTextFormat( format );
 		//	tf.autoSize = TextFieldAutoSize.LEFT;
 			tf.autoSize = TextFieldAutoSize.NONE;
 			

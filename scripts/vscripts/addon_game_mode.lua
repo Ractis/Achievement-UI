@@ -30,8 +30,8 @@ function CAddonTemplateGameMode:OnThink()
 	-- Show an achievement popup
 --	FireGameEvent( "test_achievement_popup", { } )
 	FireGameEvent( "achievement_unlocked", {
-		["achievementID"] = 0,
-		["playerID"] = 0,
+		achievementID = RandomInt( 0, 2 ),
+		playerID = 0,
 	} )
 
 	if GameRules:State_Get() == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
@@ -39,5 +39,5 @@ function CAddonTemplateGameMode:OnThink()
 	elseif GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME then
 		return nil
 	end
-	return 1
+	return RandomFloat( 0.1, 2.5 )
 end

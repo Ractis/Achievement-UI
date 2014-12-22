@@ -26,6 +26,7 @@ package achievements
 			addChild( _container );
 			
 			var primaryColor:uint = 0x30bfbf;
+			var secondaryColor:uint = 0xFFFFFF;
 			
 			// Labels
 			var lbTitle:TextField = Utils.CreateLabel( title, FontType.TextFont );
@@ -36,6 +37,7 @@ package achievements
 			
 			var lbSubtitle:TextField = Utils.CreateLabel( subtitle, FontType.TextFont );
 			_container.addChild( lbSubtitle );
+			lbSubtitle.textColor = secondaryColor;
 			lbSubtitle.x = 87; lbSubtitle.y = 50;
 			lbSubtitle.width = 145;
 			
