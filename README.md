@@ -8,9 +8,16 @@ The compiled .swf file is located at `AS3/bin/AchievementUI.swf`.
 
 
 # Custom Game Events
-`stat_collection_achievement_unlocked`
+
+## `achievement_unlocked`
+Show popup for specified player.
 
 | Key name      | Type    | Description |
 |---------------|---------|-------------|
 | achievementID | Integer |             |
 | playerID      | Integer |             |
+
+
+## `test_achievement_popup`
+Test popup.  
+No parameters are needed.
