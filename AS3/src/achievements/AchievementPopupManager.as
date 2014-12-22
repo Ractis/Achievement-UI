@@ -44,7 +44,10 @@ package achievements
 			this.api = api;
 			
 			// Register event listeners
-			api.SubscribeToGameEvent( "stat_collection_achievement_unlocked",	_onAchievementUnlocked );
+			api.SubscribeToGameEvent( "test_achievement_popup",		_onTestAchievementPopup );
+			api.SubscribeToGameEvent( "achievement_unlocked",		_onAchievementUnlocked );
+			
+			Utils.Log( "Initialized AchievementPopupManager" );
 		}
 		
 		public function testPopup():void
@@ -52,26 +55,42 @@ package achievements
 			_queueAchievementPopup( new AchievementPopup( "Achievement Unlocked!", "F in Chemistry", new DummyAchievementImg() ) );
 		}
 		
+		private function _onTestAchievementPopup( eventData:Object ):void 
+		{
+			testPopup();
+		}
+		
 		private function _onAchievementUnlocked( eventData:Object ):void 
 		{
-			var achievementID:int	= eventData.achievementID;
-			var playerID:int		= eventData.playerID;
-			
-			if ( api.localPlayerID != playerID )
+			try
 			{
-				// It's not me.
-				return;
+				var achievementID:int	= eventData.achievementID;
+				var playerID:int		= eventData.playerID;
+				
+				Utils.Log( "Achievement unlocked." );
+				Utils.Log( "  - Achievement ID : " + achievementID );
+				Utils.Log( "  - Player ID : " + playerID );
+				
+				if ( api.localPlayerID != playerID )
+				{
+					// It's not me.
+					return;
+				}
+				
+				// Grab the localized text
+				var achievementName:String = "#ACHIEVEMENT_" + achievementID + "_NAME";
+				var achievementDesc:String = "#ACHIEVEMENT_" + achievementID + "_DESCRIPTION";
+				
+				// Load the icon
+				var achievementIcon:DisplayObject = Utils.LoadTexture( "images/achievements/" + achievementID + "_on.png" );
+				
+				// Queue the popup
+				_queueAchievementPopup( new AchievementPopup( "#ACHIEVEMENT_UNLOCKED", achievementName, achievementIcon ) );
 			}
-			
-			// Grab the localized text
-			var achievementName:String = "#ACHIEVEMENT_" + achievementID + "_NAME";
-			var achievementDesc:String = "#ACHIEVEMENT_" + achievementID + "_DESCRIPTION";
-			
-			// Load the icon
-			var achievementIcon:DisplayObject = Utils.LoadTexture( "images/achievements/" + achievementID + "_on.png" );
-			
-			// Queue the popup
-			_queueAchievementPopup( new AchievementPopup( "#ACHIEVEMENT_UNLOCKED", achievementName, achievementIcon ) );
+			catch ( e:Error )
+			{
+				Utils.LogError( e );
+			}
 		}
 		
 		private function _queueAchievementPopup( newPopup:AchievementPopup ):void

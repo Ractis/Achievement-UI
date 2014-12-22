@@ -40,9 +40,19 @@ package
 		
 		public function onLoaded():void
 		{
-			try {
+			try
+			{
+				Utils.Log( "========================================" );
+				Utils.Log( "  Initializing ..." );
+				Utils.Log( "========================================" );
+				
 				visible = true;
-			} catch ( e:Error ) {
+				
+				// Initialize modules
+				_achievementPopupManager.onLoaded( this );
+			}
+			catch ( e:Error )
+			{
 				Utils.LogError( e );
 			}
 		}
